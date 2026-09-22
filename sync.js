@@ -28,7 +28,7 @@ function initSyncIndicator() {
 
 // Token 输入弹窗（首次使用时）
 function ensureToken() {
-  if (SYNC_CONFIG.token) return true;
+  if (SYNC_CONFIG.token) return Promise.resolve(true);
   return new Promise((resolve) => {
     const overlay = document.createElement('div');
     overlay.style.cssText = 'position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5)';
@@ -63,7 +63,7 @@ function ensureToken() {
         err.textContent = '密钥验证失败，请检查';
       }
     };
-    resolve(false);
+    // 不立即 resolve，等用户输入
   });
 }
 
@@ -72,9 +72,8 @@ async function initSync() {
   initSyncIndicator();
   if (!SYNC_CONFIG.token) {
     setSyncStatus('🔒', '需设置');
-    // 等待用户输入 token
-    const ok = await ensureToken();
-    if (!ok) return; // ensureToken 内部 resolve(true) 后才继续
+    await ensureToken(); // 等待用户输入 token
+    if (!SYNC_CONFIG.token) return; // 用户没输入
   }
   setSyncStatus('⏳', '同步中…');
   await pullAndMerge();
