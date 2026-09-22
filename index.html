@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="诗冉成长">
+<meta name="theme-color" content="#2D7A5F">
+<title>诗冉成长计划</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--green:#2D7A5F;--green-d:#1B5E48;--green-l:#E8F5EE;--gold:#C1B19F;--gold-l:#F5F0E8;--bg:#F5F5F7;--card:#FFF;--text:#1A1A2E;--t2:#6B7280;--t3:#9CA3AF;--border:#E5E7EB;--r:14px;--sh:0 1px 3px rgba(0,0,0,.06);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--red:#EF4444}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:calc(72px + var(--sb));-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:700}
+button{font-family:inherit;border:none;cursor:pointer;background:none}
+input,textarea,select{font-family:inherit}
+:root.child-mode{--green:#7C3AED;--green-d:#5B21B6;--green-l:#F3E8FF}
+
+.topbar{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;padding:calc(12px + var(--st)) 16px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.topbar .tb-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.topbar .avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.topbar .tb-info{flex:1;min-width:0}
+.topbar h1{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .sub{font-size:11px;opacity:.8}
+.topbar .tb-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.badge-pill{background:rgba(255,255,255,.2);border-radius:20px;padding:5px 10px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.mode-toggle{display:flex;background:rgba(255,255,255,.15);border-radius:10px;padding:2px;gap:2px}
+.mode-toggle button{color:rgba(255,255,255,.6);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;transition:all .15s}
+.mode-toggle button.active{background:rgba(255,255,255,.25);color:#fff}
+
+.page{display:none;padding:14px}
+.page.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:16px;margin-bottom:14px}
+.card h3{font-size:15px;margin-bottom:10px}
+
+.ring-wrap{display:flex;align-items:center;gap:16px}
+.ring{position:relative;width:72px;height:72px;flex-shrink:0}
+.ring svg{width:72px;height:72px;transform:rotate(-90deg)}
+.ring .bg-c{fill:none;stroke:#E5E7EB;stroke-width:7}
+.ring .fg-c{fill:none;stroke:var(--green);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .5s}
+.ring .pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;font-weight:700}
+.ring-info .lbl{font-size:11px;color:var(--t3)}
+.ring-info .num{font-size:18px;font-weight:700;margin:1px 0}
+.ring-info .det{font-size:11px;color:var(--t2)}
+
+.week-nav{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.week-nav::-webkit-scrollbar{display:none}
+.w-tab{flex-shrink:0;background:var(--card);border:2px solid transparent;border-radius:12px;padding:8px 14px;text-align:center;box-shadow:var(--sh);transition:all .15s}
+.w-tab.active{border-color:var(--green);background:var(--green-l)}
+.w-tab .wn{font-size:15px;font-weight:700}
+.w-tab .wt{font-size:9px;color:var(--t2);margin-top:1px;white-space:nowrap}
+.w-tab.active .wn{color:var(--green)}
+
+.day-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.day-tabs::-webkit-scrollbar{display:none}
+.d-tab{flex-shrink:0;padding:7px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--t2);background:var(--card);box-shadow:var(--sh);transition:all .15s;position:relative}
+.d-tab.active{background:var(--green);color:#fff}
+.d-tab .dd{font-size:9px;font-weight:400;opacity:.7}
+.d-tab .ddot{position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--red)}
+.d-tab.active .ddot{background:#fff}
+
+.dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:0 4px}
+.dh .dl{font-size:14px;font-weight:700}
+.dh .dte{font-size:11px;color:var(--t3)}
+.dh .dp{font-size:11px;font-weight:600;color:var(--green);background:var(--green-l);padding:3px 10px;border-radius:20px}
+
+.tc{background:var(--card);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;box-shadow:var(--sh);display:flex;gap:10px;align-items:flex-start;transition:all .3s;overflow:hidden}
+.tc.done{opacity:.5}
+.tc.done .tt{text-decoration:line-through}
+.tc.collapsed{padding:8px 14px}
+.tc.collapsed .tb-body{display:none}
+.tc .ck{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:2.5px solid #D1D5DB;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.tc.done .ck{background:var(--green);border-color:var(--green)}
+.tc .ck svg{width:15px;height:15px;color:#fff;opacity:0;transition:opacity .2s}
+.tc.done .ck svg{opacity:1}
+.tc .tb-body{flex:1;min-width:0}
+.tc .tb-top{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:3px}
+.tc .mt{font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.tc .lt{font-size:10px;font-weight:700;padding:2px 5px;border-radius:4px}
+.lt.A{background:#FEF3C7;color:#92400E}
+.lt.B{background:#DBEAFE;color:#1E40AF}
+.lt.C{background:#EDE9FE;color:#5B21B6}
+.tc .tt{font-size:13px;font-weight:600;line-height:1.4}
+.tc .td{font-size:10px;color:var(--t3);margin-top:1px}
+.tc .detail{font-size:12px;color:var(--t2);line-height:1.6;margin-top:6px;white-space:pre-line;max-height:0;overflow:hidden;transition:max-height .3s}
+.tc.expanded .detail{max-height:800px}
+.tc .ptip{font-size:11px;color:#92400E;background:#FEF9E7;padding:5px 9px;border-radius:8px;margin-top:5px;display:none;line-height:1.5}
+.tc.expanded .ptip{display:block}
+.tc .rec{font-size:11px;color:var(--t2);margin-top:5px;display:none;align-items:center;gap:5px}
+.tc.expanded .rec{display:flex}
+.tc .rec input{flex:1;border:1px solid var(--border);border-radius:7px;padding:3px 7px;font-size:11px;outline:none}
+.tc .rec input:focus{border-color:var(--green)}
+.tc .eh{font-size:11px;color:var(--green);margin-top:4px;font-weight:500}
+.tc.collapsed .eh{display:none}
+
+.health-row{display:flex;gap:10px;margin-bottom:12px}
+.health-input{flex:1;background:var(--card);border-radius:var(--r);padding:12px;box-shadow:var(--sh);text-align:center}
+.health-input .hi-icon{font-size:20px}
+.health-input .hi-label{font-size:11px;color:var(--t2);margin:2px 0}
+.health-input input{width:60px;border:1px solid var(--border);border-radius:8px;padding:4px;text-align:center;font-size:16px;font-weight:700;outline:none}
+.health-input input:focus{border-color:var(--green)}
+.health-input .hi-unit{font-size:11px;color:var(--t3)}
+
+.rev-sec{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:8px;box-shadow:var(--sh)}
+.rev-sec h3{font-size:14px;margin-bottom:10px;color:var(--green)}
+.rev-item{margin-bottom:10px}
+.rev-item .rl{font-size:12px;font-weight:600;margin-bottom:4px}
+.rev-item .ri{width:100%;padding:7px 10px;border:1.5px solid var(--border);border-radius:9px;font-size:12px;outline:none}
+.rev-item .ri:focus{border-color:var(--green)}
+.rev-note{width:100%;min-height:50px;padding:8px 10px;border:1.5px solid var(--border);border-radius:9px;font-size:12px;outline:none;resize:vertical}
+.rev-note:focus{border-color:var(--green)}
+.auto-stat{display:inline-block;font-size:11px;font-weight:600;color:var(--green);background:var(--green-l);padding:2px 8px;border-radius:6px;margin-left:4px}
+
+.points-banner{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;border-radius:var(--r);padding:20px;text-align:center;margin-bottom:14px}
+.points-banner .pb-num{font-size:36px;font-weight:700}
+.points-banner .pb-label{font-size:13px;opacity:.85}
+.points-banner .pb-streak{font-size:12px;margin-top:6px;opacity:.9}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.badge-cell{background:var(--card);border-radius:var(--r);padding:14px 8px;text-align:center;box-shadow:var(--sh);position:relative;transition:all .2s}
+.badge-cell.earned{border:2px solid var(--gold)}
+.badge-cell.locked{opacity:.4;filter:grayscale(1)}
+.badge-cell .b-icon{font-size:32px;margin-bottom:4px}
+.badge-cell .b-name{font-size:11px;font-weight:600}
+.badge-cell .b-desc{font-size:9px;color:var(--t3);margin-top:2px}
+.badge-cell .b-check{position:absolute;top:4px;right:4px;font-size:12px}
+.reward-item{display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh);margin-bottom:8px}
+.reward-item .rw-info{display:flex;align-items:center;gap:10px}
+.reward-item .rw-icon{font-size:24px}
+.reward-item .rw-name{font-size:14px;font-weight:600}
+.reward-item .rw-cost{font-size:12px;color:var(--t2)}
+.reward-item .rw-btn{background:var(--green);color:#fff;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;white-space:nowrap}
+.reward-item .rw-btn:disabled{background:#D1D5DB}
+.points-history .ph-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--t2)}
+.points-history .ph-row:last-child{border:none}
+.add-reward-row{display:flex;gap:8px;margin-top:10px}
+.add-reward-row input{flex:1;border:1.5px solid var(--border);border-radius:9px;padding:7px 10px;font-size:12px;outline:none}
+.add-reward-row input:focus{border-color:var(--green)}
+.add-reward-row button{background:var(--green);color:#fff;border-radius:9px;padding:7px 12px;font-size:12px;font-weight:600}
+
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sc{background:var(--card);border-radius:var(--r);padding:14px;box-shadow:var(--sh);text-align:center}
+.sc .sn{font-size:24px;font-weight:700;color:var(--green)}
+.sc .sl{font-size:11px;color:var(--t2);margin-top:2px}
+.sc .si{font-size:18px;margin-bottom:2px}
+.ms-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ms-row .mi{font-size:14px;width:20px;text-align:center}
+.ms-row .mn{font-size:11px;width:60px;flex-shrink:0;color:var(--t2)}
+.ms-row .mb{flex:1;height:8px;background:#F3F4F6;border-radius:4px;overflow:hidden}
+.ms-row .mf{height:100%;border-radius:4px;transition:width .5s}
+.ms-row .mp{font-size:10px;font-weight:600;width:40px;text-align:right;color:var(--t2)}
+.heat-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.heat-cell{aspect-ratio:1;border-radius:5px;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--t3)}
+.heat-cell.full{background:var(--green);color:rgba(255,255,255,.8)}
+.heat-cell.partial{background:var(--green-l);color:var(--green)}
+.heat-cell.today{outline:2px solid var(--gold);outline-offset:1px}
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:60px;margin-top:6px}
+.chart-bar{flex:1;background:var(--green-l);border-radius:3px 3px 0 0;min-height:2px;position:relative;transition:height .5s}
+.chart-bar.today{background:var(--green)}
+.chart-labels{display:flex;gap:4px;margin-top:2px}
+.chart-labels span{flex:1;text-align:center;font-size:8px;color:var(--t3)}
+
+.rd-card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
+.rd-card .rid{font-size:10px;font-weight:700;color:var(--green);background:var(--green-l);padding:2px 7px;border-radius:6px;display:inline-block;margin-bottom:5px}
+.rd-card .rtitle{font-size:15px;font-weight:700;margin-bottom:6px}
+.rd-card .rtext{font-size:13px;color:var(--text);line-height:1.8;white-space:pre-line}
+.rd-card .rq{margin-top:8px;font-size:12px;color:var(--t2);background:#F9FAFB;padding:8px 10px;border-radius:8px}
+.rd-card .ra{margin-top:4px;font-size:11px;color:var(--t3)}
+.as-card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
+.as-card .aa{font-size:14px;font-weight:700;color:var(--green);margin-bottom:6px}
+.as-card .arow{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:3px}
+.as-card .al{font-weight:600;color:var(--text)}
+.as-card .anext{margin-top:6px;font-size:11px;color:#92400E;background:#FEF9E7;padding:5px 9px;border-radius:8px}
+
+.s-group{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
+.s-group .gt{font-size:11px;color:var(--t3);padding:10px 14px 4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.s-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.s-row:last-child{border:none}
+.s-row .sv{color:var(--t3);font-size:12px;max-width:200px;text-align:right}
+.s-row .sa{color:var(--t3);font-size:16px}
+.child-card{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border)}
+.child-card.active{background:var(--green-l)}
+.child-card .cc-avatar{font-size:28px}
+.child-card .cc-info{flex:1}
+.child-card .cc-name{font-size:14px;font-weight:600}
+.child-card .cc-grade{font-size:11px;color:var(--t3)}
+.child-card .cc-points{font-size:12px;font-weight:700;color:var(--green)}
+
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding-bottom:var(--sb);height:calc(64px + var(--sb))}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:var(--t3);transition:color .15s}
+.ni.active{color:var(--green)}
+.ni .nicon{font-size:20px;line-height:1}
+.ni .nlbl{font-size:9px;font-weight:500}
+
+.toast{position:fixed;bottom:calc(80px + var(--sb));left:50%;transform:translateX(-50%) translateY(100px);z-index:999;background:rgba(0,0,0,.8);color:#fff;padding:10px 22px;border-radius:22px;font-size:13px;font-weight:500;transition:transform .3s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.celebrate{position:fixed;inset:0;z-index:998;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.celebrate.show{display:flex;animation:fade .3s}
+.celebrate .cel-card{background:var(--card);border-radius:24px;padding:30px 24px;text-align:center;max-width:300px;animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(.7);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+.celebrate .cel-emoji{font-size:48px;margin-bottom:8px}
+.celebrate .cel-title{font-size:20px;font-weight:700;color:var(--green);margin-bottom:6px}
+.celebrate .cel-msg{font-size:14px;color:var(--t2);margin-bottom:14px;line-height:1.5}
+.celebrate .cel-points{font-size:28px;font-weight:700;color:var(--gold)}
+.celebrate .cel-btn{background:var(--green);color:#fff;border-radius:20px;padding:10px 28px;font-size:14px;font-weight:600;margin-top:14px}
+.points-float{position:fixed;z-index:997;font-size:20px;font-weight:700;color:var(--gold);pointer-events:none;animation:floatUp 1.2s ease forwards}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.5)}30%{opacity:1;transform:translateY(-20px) scale(1.2)}100%{opacity:0;transform:translateY(-60px) scale(1)}}
+:root.child-mode .topbar{background:linear-gradient(135deg,#7C3AED,#5B21B6)}
+:root.child-mode .ni.active{color:#7C3AED}
+:root.child-mode .tc.done .ck{background:#7C3AED;border-color:#7C3AED}
+:root.child-mode .w-tab.active{border-color:#7C3AED;background:#F3E8FF}
+:root.child-mode .w-tab.active .wn{color:#7C3AED}
+:root.child-mode .d-tab.active{background:#7C3AED}
+:root.child-mode .dh .dp{color:#7C3AED;background:#F3E8FF}
+:root.child-mode .ring .fg-c{stroke:#7C3AED}
+:root.child-mode .points-banner{background:linear-gradient(135deg,#7C3AED,#5B21B6)}
+:root.child-mode .sc .sn{color:#7C3AED}
+:root.child-mode .rw-btn{background:#7C3AED}
+:root.child-mode .rev-sec h3{color:#7C3AED}
+:root.child-mode .rd-card .rid{color:#7C3AED;background:#F3E8FF}
+:root.child-mode .as-card .aa{color:#7C3AED}
+:root.child-mode .cel-btn{background:#7C3AED}
+:root.child-mode .cel-title{color:#7C3AED}
+:root.child-mode .toggle-sw.on{background:#7C3AED}
+:root.child-mode .add-reward-row button{background:#7C3AED}
+:root.child-mode .mt{background:#F3E8FF}
+
+.sec-title{font-size:15px;font-weight:700;margin-bottom:10px;padding:0 4px}
+.toggle-sw{width:44px;height:26px;border-radius:13px;background:#D1D5DB;position:relative;transition:background .2s;cursor:pointer;flex-shrink:0}
+.toggle-sw.on{background:var(--green)}
+.toggle-sw::after{content:'';position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s}
+.toggle-sw.on::after{transform:translateX(18px)}
+.confetti{position:fixed;width:8px;height:8px;z-index:996;pointer-events:none;animation:confetti 2s ease forwards}
+@keyframes confetti{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(400px) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-left">
+    <div class="avatar" id="avatar">👧</div>
+    <div class="tb-info">
+      <h1 id="topName">诗冉成长计划</h1>
+      <div class="sub" id="topSub">第一阶段·8周</div>
+    </div>
+  </div>
+  <div class="tb-right">
+    <div class="badge-pill" id="streakBadge">🔥0</div>
+  </div>
+</div>
+
+<div class="page active" id="page-home">
+  <div class="card ring-wrap">
+    <div class="ring">
+      <svg viewBox="0 0 72 72">
+        <circle class="bg-c" cx="36" cy="36" r="30"/>
+        <circle class="fg-c" cx="36" cy="36" r="30" id="ringFg" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+      </svg>
+      <div class="pct" id="ringPct">0%</div>
+    </div>
+    <div class="ring-info">
+      <div class="lbl">总进度</div>
+      <div class="num" id="totalProg">0 / 560</div>
+      <div class="det" id="totalDet">开始打卡吧！</div>
+    </div>
+    <div style="margin-left:auto">
+      <div class="mode-toggle">
+        <button class="active" onclick="setMode('normal',this)">正常</button>
+        <button onclick="setMode('busy',this)">忙碌</button>
+        <button onclick="setMode('rest',this)">休息</button>
+      </div>
+    </div>
+  </div>
+  <div class="week-nav" id="weekNav"></div>
+  <div class="day-tabs" id="dayTabs"></div>
+  <div id="dayContent"></div>
+</div>
+
+<div class="page" id="page-badges">
+  <div class="points-banner">
+    <div class="pb-num" id="pbPoints">0</div>
+    <div class="pb-label">成长积分</div>
+    <div class="pb-streak" id="pbStreak">🔥 连续打卡 0 天</div>
+  </div>
+  <div class="sec-title">🎖️ 勋章墙</div>
+  <div class="badge-grid" id="badgeGrid"></div>
+  <div class="sec-title">🎁 积分商城</div>
+  <div id="rewardList"></div>
+  <div class="card">
+    <h3 style="font-size:13px;margin-bottom:8px">➕ 添加自定义奖励</h3>
+    <div class="add-reward-row">
+      <input id="rwName" placeholder="奖励名称（如：看一集动画）" maxlength="20">
+      <input id="rwCost" type="number" placeholder="积分" style="width:70px">
+      <button onclick="addReward()">添加</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="font-size:13px;margin-bottom:6px">📈 积分明细</h3>
+    <div class="points-history" id="pointsHistory"></div>
+  </div>
+</div>
+
+<div class="page" id="page-stats">
+  <div class="sg" id="statsGrid"></div>
+  <div class="card"><h3>📊 各模块完成情况</h3><div id="moduleStats"></div></div>
+  <div class="card">
+    <h3>🏃 本周运动 & 睡眠</h3>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:4px">运动（分钟）</div>
+    <div class="chart-bars" id="exerciseChart"></div>
+    <div class="chart-labels" id="exerciseLabels"></div>
+    <div style="font-size:11px;color:var(--t3);margin:10px 0 4px">睡眠（小时）</div>
+    <div class="chart-bars" id="sleepChart"></div>
+    <div class="chart-labels" id="sleepLabels"></div>
+  </div>
+  <div class="card"><h3>🗓️ 打卡日历（8周）</h3><div class="heat-grid" id="heatGrid"></div></div>
+</div>
+
+<div class="page" id="page-resources">
+  <div class="sec-title">📖 即用阅读材料（8篇）</div>
+  <div id="readingList"></div>
+  <div class="sec-title" style="margin-top:16px">📋 阶段能力评估</div>
+  <div id="assessList"></div>
+</div>
+
+<div class="page" id="page-settings">
+  <div class="s-group">
+    <div class="gt">孩子档案</div>
+    <div id="childList"></div>
+    <div class="s-row" onclick="addChild()" style="cursor:pointer;color:var(--green)"><span>➕ 添加孩子档案</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">界面模式</div>
+    <div class="s-row"><span>👧 孩子模式</span><div class="toggle-sw" id="childModeSw" onclick="toggleChildMode()"></div></div>
+    <div class="s-row"><span>当前日模式</span><span class="sv" id="curMode">正常</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">计划信息</div>
+    <div class="s-row"><span>阶段</span><span class="sv">第一阶段·8周</span></div>
+    <div class="s-row"><span>日期范围</span><span class="sv">2026-09-21 ~ 11-15</span></div>
+    <div class="s-row"><span>总任务数</span><span class="sv" id="setTotal">560</span></div>
+    <div class="s-row"><span>每天用时</span><span class="sv">工作日~43分 / 周末~46分</span></div>
+    <div class="s-row"><span>教材版本</span><span class="sv">语文人教/数学北师大/英语PEP</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">积分规则</div>
+    <div class="s-row"><span>完成 A 级任务</span><span class="sv">+10 积分</span></div>
+    <div class="s-row"><span>完成 B 级任务</span><span class="sv">+15 积分</span></div>
+    <div class="s-row"><span>完成 C 级任务</span><span class="sv">+20 积分</span></div>
+    <div class="s-row"><span>连续打卡7天</span><span class="sv">+50 额外积分</span></div>
+    <div class="s-row"><span>全勤完成一天</span><span class="sv">+30 额外积分</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">使用说明</div>
+    <div class="s-row"><span>怎么用</span><span class="sv">打开→找当天→照着做→打勾→记录</span></div>
+    <div class="s-row"><span>A/B/C等级</span><span class="sv">A必做 B按状态 C可选</span></div>
+    <div class="s-row"><span>忙碌日</span><span class="sv">保留A B减半 C取消</span></div>
+    <div class="s-row"><span>休息日</span><span class="sv">只做A 不加额外</span></div>
+    <div class="s-row"><span>添加到桌面</span><span class="sv">Safari→分享→添加到主屏幕</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">数据管理</div>
+    <div class="s-row" onclick="exportData()" style="cursor:pointer"><span>📤 导出数据</span><span class="sa">›</span></div>
+    <div class="s-row" onclick="document.getElementById('impFile').click()" style="cursor:pointer"><span>📥 导入数据</span><span class="sa">›</span></div>
+    <div class="s-row" onclick="exportReport()" style="cursor:pointer"><span>📄 导出周报</span><span class="sa">›</span></div>
+    <div class="s-row" onclick="confirmReset()" style="cursor:pointer"><span style="color:var(--red)">🗑️ 重置当前孩子数据</span><span class="sa">›</span></div>
+  </div>
+  <div class="s-group">
+    <div class="gt">关于</div>
+    <div class="s-row"><span>版本</span><span class="sv">3.0.0 SaaS</span></div>
+    <div class="s-row"><span>数据来源</span><span class="sv">刘诗冉一年级前20%成长执行计划表V1.0</span></div>
+  </div>
+  <input type="file" id="impFile" accept=".json" style="display:none" onchange="handleImport(event)">
+</div>
+
+<div class="bnav">
+  <div class="ni active" onclick="switchPage('home',this)"><span class="nicon">📋</span><span class="nlbl">今日</span></div>
+  <div class="ni" onclick="switchPage('badges',this)"><span class="nicon">🏆</span><span class="nlbl">成就</span></div>
+  <div class="ni" onclick="switchPage('stats',this)"><span class="nicon">📊</span><span class="nlbl">统计</span></div>
+  <div class="ni" onclick="switchPage('resources',this)"><span class="nicon">📖</span><span class="nlbl">资料</span></div>
+  <div class="ni" onclick="switchPage('settings',this)"><span class="nicon">⚙️</span><span class="nlbl">设置</span></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="celebrate" id="celebrate"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

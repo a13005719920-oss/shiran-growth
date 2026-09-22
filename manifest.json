@@ -1,0 +1,17 @@
+{
+  "name": "诗冉成长计划",
+  "short_name": "诗冉打卡",
+  "description": "一年级前20%成长执行计划打卡",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F5F7",
+  "theme_color": "#2D7A5F",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
