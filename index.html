@@ -413,6 +413,8 @@ function checkAuth(){
   if(v===AUTH_PASSWORD){
     try{sessionStorage.setItem(AUTH_KEY,'1')}catch{}
     document.getElementById('authGate').style.display='none';
+    // 密码验证通过后，初始化同步
+    if(typeof initSync==='function') initSync();
   }else{
     const err=document.getElementById('authErr');
     err.style.display='block';
@@ -425,6 +427,9 @@ function checkAuth(){
   if(!isAuthed()){
     document.getElementById('authGate').style.display='flex';
     setTimeout(()=>{const i=document.getElementById('authInput');if(i)i.focus()},300);
+  }else{
+    // 已验证过，直接初始化同步
+    if(typeof initSync==='function') setTimeout(()=>initSync(),100);
   }
 })();
 </script>
@@ -433,11 +438,7 @@ function checkAuth(){
 <script src="sync.js"></script>
 <script src="app.js"></script>
 <script>
-// 启动时初始化同步
-initSyncIndicator();
-pullAndMerge().then(() => {
-  startAutoPull();
-});
+// initSync 在密码验证通过后由 checkAuth/initAuth 调用
 </script>
 </body>
 </html>
