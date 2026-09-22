@@ -388,6 +388,47 @@ input,textarea,select{font-family:inherit}
 <div class="toast" id="toast"></div>
 <div class="celebrate" id="celebrate"></div>
 
+<!-- 密码门禁 -->
+<div id="authGate" style="position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,#2D7A5F,#1B5E48)">
+  <div style="text-align:center;max-width:320px;padding:24px">
+    <div style="font-size:48px;margin-bottom:12px">📚</div>
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">诗冉成长计划</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:24px">请输入访问密码</div>
+    <input id="authInput" type="password" placeholder="输入密码" style="width:100%;padding:14px;border-radius:12px;border:none;font-size:16px;text-align:center;outline:none;margin-bottom:12px" onkeydown="if(event.key==='Enter')checkAuth()">
+    <button onclick="checkAuth()" style="width:100%;padding:14px;border-radius:12px;background:#fff;color:#2D7A5F;font-size:16px;font-weight:700">进入</button>
+    <div id="authErr" style="color:#FCA5A5;font-size:13px;margin-top:10px;display:none">密码错误，请重试</div>
+  </div>
+</div>
+
+<script>
+// ===== 密码门禁 =====
+const AUTH_KEY='shiran_auth_v3';
+const AUTH_PASSWORD='shiran2026'; // 后续可改
+
+function isAuthed(){
+  try{return sessionStorage.getItem(AUTH_KEY)==='1'}catch{return false}
+}
+function checkAuth(){
+  const v=document.getElementById('authInput').value.trim();
+  if(v===AUTH_PASSWORD){
+    try{sessionStorage.setItem(AUTH_KEY,'1')}catch{}
+    document.getElementById('authGate').style.display='none';
+  }else{
+    const err=document.getElementById('authErr');
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none',2000);
+    document.getElementById('authInput').value='';
+    document.getElementById('authInput').focus();
+  }
+}
+(function initAuth(){
+  if(!isAuthed()){
+    document.getElementById('authGate').style.display='flex';
+    setTimeout(()=>{const i=document.getElementById('authInput');if(i)i.focus()},300);
+  }
+})();
+</script>
+
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
