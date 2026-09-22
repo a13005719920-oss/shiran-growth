@@ -60,7 +60,11 @@ function loadApp() {
   } catch {}
   return { version: 3, activeChild: 'shiran', children: { shiran: { ...DEFAULT_CHILD } } };
 }
-function saveApp() { localStorage.setItem(STORE_KEY, JSON.stringify(app)); }
+function saveApp() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(app));
+  // 云端同步（防抖推送）
+  if (typeof pushToCloud === 'function') pushToCloud(app);
+}
 function child() { return app.children[app.activeChild] || app.children[Object.keys(app.children)[0]]; }
 function s() { return child(); }
 
