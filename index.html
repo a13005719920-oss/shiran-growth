@@ -430,6 +430,14 @@ function checkAuth(){
 </script>
 
 <script src="data.js"></script>
+<script src="sync.js"></script>
 <script src="app.js"></script>
+<script>
+// 启动时初始化同步
+initSyncIndicator();
+pullAndMerge().then(() => {
+  startAutoPull();
+});
+</script>
 </body>
 </html>
