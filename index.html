@@ -237,6 +237,93 @@ input,textarea,select{font-family:inherit}
 .toggle-sw.on::after{transform:translateX(18px)}
 .confetti{position:fixed;width:8px;height:8px;z-index:996;pointer-events:none;animation:confetti 2s ease forwards}
 @keyframes confetti{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(400px) rotate(720deg);opacity:0}}
+
+/* ===== V4 增强模块样式 ===== */
+/* 跳过按钮 */
+.skip-btn{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:#FEE2E2;color:#DC2626;margin-left:auto;white-space:nowrap}
+.skip-btn.unskip{background:#FEF3C7;color:#D97706}
+.tc.skipped{opacity:.45}
+.tc.skipped .tt{text-decoration:line-through}
+
+/* 挑战栏 */
+.challenge-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#FFF7ED,#FFFBEB);border:1px solid #FED7AA;border-radius:12px;padding:12px;margin-bottom:12px}
+.challenge-banner.achieved{background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border-color:#86EFAC}
+.ch-icon{font-size:28px;flex-shrink:0}
+.ch-body{flex:1;min-width:0}
+.ch-title{font-size:14px;font-weight:700;color:#9A3412}
+.challenge-banner.achieved .ch-title{color:#166534}
+.ch-desc{font-size:11px;color:#9A3412;opacity:.8;margin:2px 0 6px}
+.ch-bar{height:6px;background:#FED7AA;border-radius:3px;overflow:hidden}
+.ch-fill{height:100%;background:linear-gradient(90deg,#F97316,#FB923C);border-radius:3px;transition:width .4s}
+.challenge-banner.achieved .ch-fill{background:linear-gradient(90deg,#22C55E,#4ADE80)}
+.ch-progress{font-size:14px;font-weight:700;color:#9A3412;flex-shrink:0}
+.challenge-banner.achieved .ch-progress{color:#166534}
+
+/* 复习区 */
+.review-section{background:linear-gradient(135deg,#EFF6FF,#F0F9FF);border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin-bottom:12px}
+.rev-head{font-size:13px;font-weight:700;color:#1E40AF;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.rev-card{background:#fff;border-radius:10px;padding:10px;margin-bottom:8px;display:flex;flex-direction:column;gap:6px}
+.rev-tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;display:inline-block;align-self:flex-start}
+.rev-title{font-size:13px;color:var(--text);line-height:1.4}
+.rev-actions{display:flex;gap:8px}
+.rev-done{flex:1;padding:7px;border-radius:8px;background:#3B82F6;color:#fff;font-size:12px;font-weight:600}
+.rev-skip{padding:7px 14px;border-radius:8px;background:#E5E7EB;color:var(--t2);font-size:12px}
+
+/* ===== 平板横屏适配 ===== */
+@media (min-width: 768px) and (orientation: landscape) {
+  /* 主体内容居中限宽 */
+  .page{max-width:900px;margin:0 auto;padding:20px}
+  .topbar{justify-content:center}
+  .topbar .tb-left{max-width:900px}
+  .topbar h1{font-size:18px}
+
+  /* 任务卡片双列 */
+  #dayContent .tc{width:calc(50% - 6px);display:inline-flex;vertical-align:top}
+  #dayContent .tc:nth-child(odd){margin-right:6px}
+
+  /* 挑战栏+复习区全宽 */
+  #challengeBanner,.review-section{width:100%!important;display:flex!important}
+
+  /* 周导航横向滚动更宽 */
+  #weekNav{max-width:900px;margin:0 auto}
+
+  /* 统计页网格放大 */
+  .stat-grid,.stats-grid{grid-template-columns:repeat(4,1fr);gap:14px}
+
+  /* 勋章网格放大 */
+  #badgeGrid{grid-template-columns:repeat(6,1fr)}
+
+  /* 积分明细双列 */
+  #pointsHistory .ph-row{width:calc(50% - 6px);display:inline-flex}
+
+  /* 底部导航居中限宽 */
+  .bnav{max-width:500px;margin:0 auto;border-radius:16px 16px 0 0}
+
+  /* 复盘表双列 */
+  .rev-sec .rev-item{width:calc(50% - 6px);display:inline-block;vertical-align:top}
+
+  /* 运动睡眠图表更大 */
+  .chart-wrap{height:160px}
+
+  /* 周报导出按钮居中 */
+  .card{max-width:900px;margin-left:auto;margin-right:auto}
+}
+
+/* 大屏（桌面/大平板）进一步优化 */
+@media (min-width: 1024px) {
+  .page{max-width:1100px}
+  #dayContent .tc{width:calc(33.33% - 8px)}
+  #badgeGrid{grid-template-columns:repeat(8,1fr)}
+  #pointsHistory .ph-row{width:calc(33.33% - 8px)}
+}
+
+/* 横屏时减少顶部安全区 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .topbar{padding:6px 16px 6px}
+  .topbar .avatar{width:28px;height:28px;font-size:16px}
+  .page{padding:10px}
+  body{padding-bottom:calc(64px + var(--sb))}
+}
 </style>
 </head>
 <body>
@@ -437,6 +524,7 @@ function checkAuth(){
 <script src="data.js"></script>
 <script src="sync.js"></script>
 <script src="app.js"></script>
+<script src="enhancements.js"></script>
 <script>
 // initSync 在密码验证通过后由 checkAuth/initAuth 调用
 </script>
