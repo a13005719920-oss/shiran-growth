@@ -1,5 +1,5 @@
 const PLAN = {
-  "childName": "刘诗冉",
+  "childName": "冉冉",
   "grade": "一年级",
   "startDate": "2026-09-21",
   "goal": "进入同龄前20%能力区间",

@@ -1,4 +1,4 @@
-/* ===== 诗冉成长计划 V3.0 SaaS 完整版 ===== */
+/* ===== 冉冉成长计划 V3.0 SaaS 完整版 ===== */
 
 // ===== Constants =====
 const POINTS = { A: 10, B: 15, C: 20 };
@@ -35,7 +35,7 @@ const DEFAULT_REWARDS = [
 ];
 
 const DEFAULT_CHILD = {
-  id: 'shiran', name: '刘诗冉', avatar: '👧', grade: '一年级',
+  id: 'shiran', name: '冉冉', avatar: '👧', grade: '一年级',
   points: 0, streak: 0, maxStreak: 0, lastDate: null,
   tasks: {}, records: {}, reviews: {}, health: {},
   rewards: [...DEFAULT_REWARDS],
@@ -50,6 +50,16 @@ const STORE_KEY = 'shiran_growth_v3';
 
 // ===== State =====
 let app = loadApp();
+// 一次性迁移：老版本把默认档案的姓名写死在源码里，浏览器里已经存下来的数据还是旧名字。
+// 只改默认档案（id === DEFAULT_CHILD.id），不动用户自己添加的孩子；只执行一次。
+function migrateDefaultChildName(a) {
+  if (a.nameMigratedV1) return false;
+  a.nameMigratedV1 = true;
+  const c = a.children && a.children[DEFAULT_CHILD.id];
+  if (c && c.name !== DEFAULT_CHILD.name) { c.name = DEFAULT_CHILD.name; return true; }
+  return false;
+}
+if (migrateDefaultChildName(app)) saveApp();
 let currentWeek = getCurrentWeekNum();
 let currentDay = 0;
 
@@ -60,13 +70,71 @@ function loadApp() {
   } catch {}
   return { version: 3, activeChild: 'shiran', children: { shiran: { ...DEFAULT_CHILD } } };
 }
+let saveWarned = false;
 function saveApp() {
-  localStorage.setItem(STORE_KEY, JSON.stringify(app));
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(app));
+  } catch (e) {
+    // 隐私模式 / 存储被禁用 / 空间满时 localStorage 会抛错。
+    // 不能让打卡流程崩掉，但必须明确提醒一次：进度只存在内存里，刷新会丢。
+    if (!saveWarned) {
+      saveWarned = true;
+      try { showToast('⚠️ 本机存储不可用，进度可能保存不了'); } catch {}
+    }
+  }
   // 云端同步（防抖推送）
   if (typeof pushToCloud === 'function') pushToCloud(app);
 }
 function child() { return app.children[app.activeChild] || app.children[Object.keys(app.children)[0]]; }
 function s() { return child(); }
+
+// ===== 积分流水（唯一入口）=====
+// 规则：任何积分变动都必须走下面两个函数，保证「总积分 === 积分流水之和」。
+// 1) 不再把积分截断为 0（截断会让余额和流水对不上，跳过/撤销后无法精确退回）。
+// 2) 不再丢弃历史记录（旧代码在超过 100 条时截断，同时会让总额与流水错开）。
+// 3) 每条流水都带 key（如 task:0-1-2 / skip:0-1-2），撤销和取消跳过按 key 精确匹配。
+//    注意：计划表里存在大量同名同分值的任务，按标题匹配会误删别的记录，所以必须用 key。
+function addPoints(c, delta, text, key) {
+  delta = Math.round(delta);
+  c.points = (c.points || 0) + delta;
+  const rec = { time: Date.now(), text: text, points: (delta >= 0 ? '+' : '-') + Math.abs(delta) };
+  if (key) rec.key = key;
+  c.pointsHistory.unshift(rec);
+  return rec;
+}
+
+// 删除匹配的流水，并把该条流水里记录的分数等额退/扣回去（+10 → 扣10；-5 → 退5）。
+// 带 key 的流水按 key 精确匹配；旧数据没有 key 时用 fallback(记录) 兜底，
+// 且兜底最多删「最近一条」——同名同分值的旧记录不能被一次清空，否则会多退分。
+// 返回对余额的实际影响（正数=退回加分，负数=撤销扣分，0=没找到）。
+function revertPoints(c, key, fallback) {
+  if (!key && !fallback) return 0;
+  let delta = 0, fallbackUsed = false;
+  for (let i = c.pointsHistory.length - 1; i >= 0; i--) {
+    const h = c.pointsHistory[i];
+    const byKey = !!(key && h.key === key);
+    const byFallback = !!(fallback && !h.key && !fallbackUsed && fallback(h));
+    if (!byKey && !byFallback) continue;
+    if (byFallback) fallbackUsed = true;
+    const v = parseInt(h.points, 10) || 0;
+    c.points -= v;
+    c.pointsHistory.splice(i, 1);
+    delta -= v;
+  }
+  return delta;
+}
+
+function dKey(wi, di) { return `${wi}-${di}`; }
+function hasRecord(c, key) { return !!key && c.pointsHistory.some(h => h.key === key); }
+// 同一毫秒内连续两次同类操作（例如连点兑换）会撞出相同的 Date.now()，
+// 所以流水 key 统一带上自增序号，保证 key 唯一。
+let pointsSeq = 0;
+function pointsUid() { return Date.now() + '-' + (++pointsSeq); }
+// 自检：总积分是否等于流水之和（用于测试与排查，不修改数据）
+function pointsConsistent(c) {
+  const sum = (c.pointsHistory || []).reduce((t, h) => t + (parseInt(h.points, 10) || 0), 0);
+  return { ok: sum === (c.points || 0), points: c.points || 0, sum: sum, diff: (c.points || 0) - sum };
+}
 
 // ===== Task helpers =====
 function tKey(wi, di, ti) { return `${wi}-${di}-${ti}`; }
@@ -77,42 +145,41 @@ function toggleTask(wi, di, ti) {
   const k = tKey(wi, di, ti);
   const was = !!c.tasks[k];
   c.tasks[k] = !was;
+  const task = PLAN.weeks[wi].days[di].tasks[ti];
+  const pts = POINTS[task.level] || 10;
   if (c.tasks[k]) {
-    // award points
-    const task = PLAN.weeks[wi].days[di].tasks[ti];
-    const pts = POINTS[task.level] || 10;
-    c.points += pts;
-    c.pointsHistory.unshift({ time: Date.now(), text: `完成 ${task.module}·${task.title.slice(0,15)}`, points: `+${pts}` });
-    if (c.pointsHistory.length > 100) c.pointsHistory.length = 100;
+    // award points（带 key，撤销时能精确找到这一条）
+    addPoints(c, pts, `完成 ${task.module}·${task.title.slice(0,15)}`, 'task:' + k);
     checkStreak();
     // float animation
     floatPoints(pts);
     // check perfect day
     const day = PLAN.weeks[wi].days[di];
     const allDone = day.tasks.every((_, t2) => c.tasks[tKey(wi, di, t2)]);
-    if (allDone) {
+    if (allDone && !hasRecord(c, 'allin:' + dKey(wi, di))) {
       c.perfectDays = (c.perfectDays || 0) + 1;
-      c.points += BONUS_FULL_DAY;
-      c.pointsHistory.unshift({ time: Date.now(), text: '全勤完成一天！', points: `+${BONUS_FULL_DAY}` });
+      addPoints(c, BONUS_FULL_DAY, '全勤完成一天！', 'allin:' + dKey(wi, di));
       setTimeout(() => celebrate('🎉', '完美一天！', `今天全部完成！\n额外奖励 +${BONUS_FULL_DAY} 积分`, BONUS_FULL_DAY), 200);
     }
-    // streak bonus
-    if (c.streak > 0 && c.streak % 7 === 0) {
-      c.points += BONUS_STREAK7;
-      c.pointsHistory.unshift({ time: Date.now(), text: `连续${c.streak}天！`, points: `+${BONUS_STREAK7}` });
+    // streak bonus：同一轮连续天数只发一次，避免当天每打一个勾都发一遍
+    if (c.streak > 0 && c.streak % 7 === 0 && !hasRecord(c, 'streak:' + c.streak)) {
+      addPoints(c, BONUS_STREAK7, `连续${c.streak}天！`, 'streak:' + c.streak);
       setTimeout(() => celebrate('🔥', `${c.streak}天连续打卡！`, `坚持就是胜利！\n额外奖励 +${BONUS_STREAK7} 积分`, BONUS_STREAK7), 1200);
     }
     // update module counts
     c.moduleDone[task.module] = (c.moduleDone[task.module] || 0) + 1;
     c.totalDone++;
   } else {
-    // undo
-    const task = PLAN.weeks[wi].days[di].tasks[ti];
-    const pts = POINTS[task.level] || 10;
-    c.points = Math.max(0, c.points - pts);
+    // undo：按 key 精确删除这一次完成的积分记录，并等额扣回（旧数据无 key 时按标题+分值兜底）
+    revertPoints(c, 'task:' + k, h => h.points === `+${pts}` && h.text.includes(`完成 ${task.module}·${task.title.slice(0,12)}`));
     c.totalDone = Math.max(0, c.totalDone - 1);
     c.moduleDone[task.module] = Math.max(0, (c.moduleDone[task.module] || 0) - 1);
-    c.pointsHistory = c.pointsHistory.filter(h => !h.text.includes(task.title.slice(0, 15)) || h.points !== `+${pts}` || Date.now() - h.time > 5000);
+    // 撤销后当天不再全勤 → 同时撤销“全勤完成一天”奖励，避免反复撤销/重打重复领奖
+    const day = PLAN.weeks[wi].days[di];
+    const stillAllDone = day.tasks.every((_, t2) => c.tasks[tKey(wi, di, t2)]);
+    if (!stillAllDone && revertPoints(c, 'allin:' + dKey(wi, di), null) !== 0) {
+      c.perfectDays = Math.max(0, (c.perfectDays || 0) - 1);
+    }
   }
   // update max streak
   c.maxStreak = Math.max(c.maxStreak || 0, c.streak);
@@ -137,8 +204,7 @@ function checkBadges() {
   BADGES_DEF.forEach(b => {
     if (!c.earnedBadges.includes(b.id) && b.cond(c)) {
       c.earnedBadges.push(b.id);
-      c.points += 30;
-      c.pointsHistory.unshift({ time: Date.now(), text: `获得勋章「${b.name}」`, points: '+30' });
+      addPoints(c, 30, `获得勋章「${b.name}」`, 'badge:' + b.id);
       setTimeout(() => showToast(`🎖️ 获得勋章：${b.name}！+30积分`), 800);
     }
   });
@@ -233,15 +299,7 @@ function renderHome() {
     const dStr = day.date ? day.date.slice(5).replace('-', '/') : '';
     // dot if not all done
     const visibleTasks = day.tasks.filter(shouldShowTask);
-    const allDone = visibleTasks.length > 0 && visibleTasks.every((_, ti2) => {
-      // find original index
-      const origIdx = day.tasks.findIndex((tk, idx) => idx >= 0 && shouldShowTask(tk) && day.tasks.indexOf(tk) === day.tasks.indexOf(visibleTasks[0]) + visibleTasks.indexOf(tk));
-      return false; // simplified - just show dot if any undone
-    });
-    const anyUndone = visibleTasks.some((tk, ti2) => {
-      const origIdx = day.tasks.indexOf(tk);
-      return !isDone(currentWeek - 1, di, origIdx);
-    });
+    const anyUndone = visibleTasks.some((tk) => !isDone(currentWeek - 1, di, day.tasks.indexOf(tk)));
     if (anyUndone) t.classList.add('has-dot');
     t.innerHTML = `Day ${di + 1}<span class="dd"> ${dStr}</span>`;
     if (anyUndone) { const dot = document.createElement('span'); dot.className = 'ddot'; dot.style.cssText = 'position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--red)'; t.appendChild(dot); }
@@ -399,6 +457,9 @@ function renderBadges() {
   const c = s();
   document.getElementById('pbPoints').textContent = c.points || 0;
   document.getElementById('pbStreak').textContent = `🔥 连续打卡 ${c.streak || 0} 天`;
+  // 积分可能为负（跳过扣分超过余额时），明确提示孩子：完成任务就能补回
+  const pc = document.querySelector('.points-banner .pb-label');
+  if (pc) pc.textContent = (c.points || 0) < 0 ? `成长积分（欠 ${-c.points} 分，完成任务可补回）` : '成长积分';
 
   // Badges
   const bg = document.getElementById('badgeGrid');
@@ -441,8 +502,7 @@ function redeemReward(id) {
   const c = s();
   const r = (c.rewards || []).find(x => x.id === id);
   if (!r || c.points < r.cost) return;
-  c.points -= r.cost;
-  c.pointsHistory.unshift({ time: Date.now(), text: `兑换「${r.name}」`, points: `-${r.cost}` });
+  addPoints(c, -r.cost, `兑换「${r.name}」`, 'redeem:' + r.id + ':' + pointsUid());
   showToast(`✅ 已兑换「${r.name}」！消耗${r.cost}积分`);
   checkBadges();
   saveApp();
@@ -644,7 +704,7 @@ function exportData() {
   const blob = new Blob([JSON.stringify(app, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = `诗冉成长数据_${new Date().toISOString().slice(0, 10)}.json`;
+  a.href = url; a.download = `冉冉成长数据_${new Date().toISOString().slice(0, 10)}.json`;
   a.click(); URL.revokeObjectURL(url);
   showToast('已导出数据');
 }
@@ -665,7 +725,7 @@ function handleImport(e) {
 function exportReport() {
   const c = s();
   const week = PLAN.weeks[currentWeek - 1];
-  let report = `诗冉成长周报\n${c.name} · ${c.grade} · W${currentWeek}（${week?.theme || ''}）\n生成时间：${new Date().toLocaleString('zh-CN')}\n\n`;
+  let report = `冉冉成长周报\n${c.name} · ${c.grade} · W${currentWeek}（${week?.theme || ''}）\n生成时间：${new Date().toLocaleString('zh-CN')}\n\n`;
 
   // Week stats
   let wDone = 0, wTotal = 0;
@@ -704,7 +764,7 @@ function exportReport() {
   const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = `诗冉周报_W${currentWeek}_${new Date().toISOString().slice(0, 10)}.txt`;
+  a.href = url; a.download = `冉冉周报_W${currentWeek}_${new Date().toISOString().slice(0, 10)}.txt`;
   a.click(); URL.revokeObjectURL(url);
   showToast('周报已导出');
 }

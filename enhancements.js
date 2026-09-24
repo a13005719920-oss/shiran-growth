@@ -38,16 +38,12 @@ function skipTask(wi, di, ti) {
 
   // 如果已完成，不允许跳过
   if (c.tasks[k]) return;
+  // 已经跳过：重复点击不再重复扣分（原来会重复扣）
+  if (v4.skipped[k]) return;
 
   v4.skipped[k] = true;
   const pts = Math.min(POINTS[task.level] || 10, 5); // 最多扣5分
-  c.points = Math.max(0, c.points - pts);
-  c.pointsHistory.unshift({
-    time: Date.now(),
-    text: `跳过 ${task.module}·${task.title.slice(0,12)}`,
-    points: `-${pts}`
-  });
-  if (c.pointsHistory.length > 100) c.pointsHistory.length = 100;
+  addPoints(c, -pts, `跳过 ${task.module}·${task.title.slice(0,12)}`, 'skip:' + k);
 
   // 连续跳过统计
   const mod = task.module;
@@ -59,15 +55,10 @@ function skipTask(wi, di, ti) {
   }
   v4.lastSkipDate[mod] = today;
 
-  // 连续3天跳过同一模块 → 额外提醒
+  // 连续3天跳过同一模块 → 额外提醒（独立 key，取消跳过时一并退回，但账目上分得开）
   if (v4.skipStreak[mod] >= 3 && task.level === 'A') {
     const extra = 5;
-    c.points = Math.max(0, c.points - extra);
-    c.pointsHistory.unshift({
-      time: Date.now(),
-      text: `${mod}连续3天未做，需关注`,
-      points: `-${extra}`
-    });
+    addPoints(c, -extra, `${mod}连续3天未做，需关注`, 'skip3:' + k);
     showToast(`💡 ${mod}连续3天跳过了，这科要多关注哦`);
   } else {
     showToast(`已跳过，扣${pts}分。没关系，明天继续！`);
@@ -77,13 +68,30 @@ function skipTask(wi, di, ti) {
   setTimeout(() => renderHome(), 100);
 }
 
+// 取消跳过 = 撤回这次跳过：退回本次跳过扣掉的积分，并删除对应的扣分记录。
+// 这样「总积分」和「积分历史」始终一致，等于这次跳过没发生过。
 function unskipTask(wi, di, ti) {
   const c = s();
   const v4 = ensureState();
   const k = tKey(wi, di, ti);
+  if (!v4.skipped[k]) return; // 没有跳过就不做任何事（重复点击安全）
+  const task = PLAN.weeks[wi]?.days?.[di]?.tasks?.[ti];
   delete v4.skipped[k];
-  // 不退分（已经扣了）
+
+  const titleKey = task ? task.title.slice(0,12) : '';
+  // 旧数据（没有 key 的历史记录）按“跳过 + 标题前12字”兜底匹配（最多一条）
+  const legacySkip = h => !h.key && !!task && String(h.text || '').includes(titleKey);
+  let back = revertPoints(c, 'skip:' + k, legacySkip);   // 单次跳过扣分
+  back += revertPoints(c, 'skip3:' + k, null);           // 该次跳过触发的“连续3天”额外扣分
+
+  // 该模块的“连续跳过”计数回退一次：再跳过时会重新开始计罚
+  if (task && v4.skipStreak[task.module]) {
+    v4.skipStreak[task.module] = Math.max(0, v4.skipStreak[task.module] - 1);
+    if (!v4.skipStreak[task.module]) delete v4.lastSkipDate[task.module];
+  }
+
   saveApp();
+  showToast(back > 0 ? `已取消跳过，退回 ${back} 分 ↩️` : '已取消跳过');
   setTimeout(() => renderHome(), 100);
 }
 
@@ -117,14 +125,10 @@ function getTodayReviews() {
 function completeReview(reviewKey, reviewItem) {
   const c = s();
   const v4 = ensureState();
+  if (!reviewItem) return;
+  if (v4.reviewDone[reviewKey]) return; // 重复点击不重复加分
   v4.reviewDone[reviewKey] = true;
-  c.points += 5;
-  c.pointsHistory.unshift({
-    time: Date.now(),
-    text: `复习 ${reviewItem.module}·${reviewItem.title.slice(0,12)}`,
-    points: '+5'
-  });
-  if (c.pointsHistory.length > 100) c.pointsHistory.length = 100;
+  addPoints(c, 5, `复习 ${reviewItem.module}·${reviewItem.title.slice(0,12)}`, 'rev:' + reviewKey);
   showToast('复习完成！+5分 🎉');
   saveApp();
   setTimeout(() => renderHome(), 100);
@@ -156,7 +160,8 @@ function updateChallenge(weekNum) {
   const c = s();
   const v4 = ensureState();
   const ch = getWeekChallenge(weekNum);
-  if (ch.achieved) return;
+  // 注意：不能在这里因为 ch.achieved 就直接 return——那样进度会永久冻结，
+  // 撤回打卡后进度条还显示旧值。奖励只发一次由下面的 !ch.achieved 保证。
 
   const def = CHALLENGES.find(d => d.id === ch.type);
   if (!def) return;
@@ -184,17 +189,16 @@ function updateChallenge(weekNum) {
     });
   }
 
+  const changed = ch.progress !== progress;
   ch.progress = progress;
   if (progress >= def.target && !ch.achieved) {
     ch.achieved = true;
-    c.points += def.reward;
-    c.pointsHistory.unshift({
-      time: Date.now(),
-      text: `完成周挑战「${def.name}」`,
-      points: `+${def.reward}`
-    });
+    addPoints(c, def.reward, `完成周挑战「${def.name}」`, 'chal:' + weekNum + ':' + def.id);
     saveApp();
     setTimeout(() => celebrate(def.icon, `挑战完成！${def.name}`, `本周目标达成！\n额外奖励 +${def.reward} 积分`, def.reward), 500);
+  } else if (changed) {
+    // 进度变了也要落盘，否则刷新后进度条会显示旧值（没变就不用重复写）
+    saveApp();
   }
 }
 
@@ -207,12 +211,10 @@ toggleTask = function(wi, di, ti) {
   // 新完成 → 安排复习 + 更新挑战
   if (!wasDone && nowDone) {
     scheduleReview(wi, di, ti);
-    updateChallenge(currentWeek);
   }
-  // 取消完成 → 更新挑战进度
-  if (wasDone && !nowDone) {
-    updateChallenge(currentWeek);
-  }
+  // 完成或被撤销 → 都按“这个任务所属的那一周”更新挑战进度
+  // 注意：wi 是 0 起的下标，updateChallenge 要的是 1 起的 weekNum
+  if (wasDone !== nowDone) updateChallenge(wi + 1);
 };
 
 // ===== 包装 renderHome：注入复习区+挑战栏+跳过按钮 =====
@@ -292,24 +294,27 @@ function injectReviewSection() {
         <div class="rev-tag" style="background:${mod.color}20;color:${mod.color}">${mod.icon} ${r.module}</div>
         <div class="rev-title">${r.title.slice(0, 40)}</div>
         <div class="rev-actions">
-          <button class="rev-done" onclick="window._v4_completeReview('${rk}', ${i})">复习了 +5</button>
-          <button class="rev-skip" onclick="window._v4_skipReview('${rk}', ${i})">跳过</button>
+          <button class="rev-done" onclick="window._v4_completeReview('${rk}')">复习了 +5</button>
+          <button class="rev-skip" onclick="window._v4_skipReview('${rk}')">跳过</button>
         </div>
-      </div>`;
+      </div>
+    `;
   });
   section.innerHTML = html;
   dc.insertBefore(section, refNode);
 }
 
-// 全局回调
-window._v4_completeReview = function(rk, idx) {
-  const reviews = getTodayReviews();
-  const item = reviews[idx];
-  if (item) completeReview(rk, item);
+// 全局回调：按复习 key 找条目（原来按下标，列表重排后会错位到别的任务）
+function findReviewByKey(rk) {
+  return getTodayReviews().find(r => `rev_${r.wk}_${r.dy}_${r.ti}` === rk) || null;
+}
+window._v4_completeReview = function(rk) {
+  completeReview(rk, findReviewByKey(rk));
 };
-window._v4_skipReview = function(rk, idx) {
+window._v4_skipReview = function(rk) {
   const v4 = ensureState();
-  v4.reviewDone[rk] = true; // 标记为已处理，不再显示
+  if (v4.reviewDone[rk]) return; // 重复点击安全
+  v4.reviewDone[rk] = true; // 标记为已处理，不再显示（跳过复习不扣分、不加分）
   saveApp();
   renderHome();
 };

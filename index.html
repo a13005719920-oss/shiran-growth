@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="诗冉成长">
+<meta name="apple-mobile-web-app-title" content="冉冉成长">
 <meta name="theme-color" content="#2D7A5F">
-<title>诗冉成长计划</title>
+<title>冉冉成长计划</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <style>
@@ -240,7 +240,7 @@ input,textarea,select{font-family:inherit}
 
 /* ===== V4 增强模块样式 ===== */
 /* 跳过按钮 */
-.skip-btn{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:#FEE2E2;color:#DC2626;margin-left:auto;white-space:nowrap}
+.skip-btn{font-size:12px;font-weight:600;padding:8px 14px;border-radius:8px;background:#FEE2E2;color:#DC2626;margin-left:auto;white-space:nowrap}
 .skip-btn.unskip{background:#FEF3C7;color:#D97706}
 .tc.skipped{opacity:.45}
 .tc.skipped .tt{text-decoration:line-through}
@@ -281,8 +281,11 @@ input,textarea,select{font-family:inherit}
   #dayContent .tc{width:calc(50% - 6px);display:inline-flex;vertical-align:top}
   #dayContent .tc:nth-child(odd){margin-right:6px}
 
-  /* 挑战栏+复习区全宽 */
-  #challengeBanner,.review-section{width:100%!important;display:flex!important}
+  /* 挑战栏+复习区全宽；复习卡片两列网格（原来 display:flex!important 会把卡片挤成横排） */
+  #challengeBanner{width:100%!important}
+  #reviewSection{width:100%!important;display:grid!important;grid-template-columns:1fr 1fr;gap:8px}
+  #reviewSection .rev-head{grid-column:1 / -1}
+  #reviewSection .rev-card{margin-bottom:0}
 
   /* 周导航横向滚动更宽 */
   #weekNav{max-width:900px;margin:0 auto}
@@ -332,7 +335,7 @@ input,textarea,select{font-family:inherit}
   <div class="tb-left">
     <div class="avatar" id="avatar">👧</div>
     <div class="tb-info">
-      <h1 id="topName">诗冉成长计划</h1>
+      <h1 id="topName">冉冉成长计划</h1>
       <div class="sub" id="topSub">第一阶段·8周</div>
     </div>
   </div>
@@ -450,6 +453,11 @@ input,textarea,select{font-family:inherit}
     <div class="s-row"><span>添加到桌面</span><span class="sv">Safari→分享→添加到主屏幕</span></div>
   </div>
   <div class="s-group">
+    <div class="gt">数据保存与同步</div>
+    <div class="s-row"><span>💾 数据保存</span><span class="sv">本机保存（云同步暂停）</span></div>
+    <div class="s-row"><span>多设备同步</span><span class="sv">暂停中 · 换设备前先「导出数据」（下一栏）</span></div>
+  </div>
+  <div class="s-group">
     <div class="gt">数据管理</div>
     <div class="s-row" onclick="exportData()" style="cursor:pointer"><span>📤 导出数据</span><span class="sa">›</span></div>
     <div class="s-row" onclick="document.getElementById('impFile').click()" style="cursor:pointer"><span>📥 导入数据</span><span class="sa">›</span></div>
@@ -459,7 +467,7 @@ input,textarea,select{font-family:inherit}
   <div class="s-group">
     <div class="gt">关于</div>
     <div class="s-row"><span>版本</span><span class="sv">3.0.0 SaaS</span></div>
-    <div class="s-row"><span>数据来源</span><span class="sv">刘诗冉一年级前20%成长执行计划表V1.0</span></div>
+    <div class="s-row"><span>数据来源</span><span class="sv">冉冉一年级前20%成长执行计划表V1.0</span></div>
   </div>
   <input type="file" id="impFile" accept=".json" style="display:none" onchange="handleImport(event)">
 </div>
@@ -479,7 +487,7 @@ input,textarea,select{font-family:inherit}
 <div id="authGate" style="position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,#2D7A5F,#1B5E48)">
   <div style="text-align:center;max-width:320px;padding:24px">
     <div style="font-size:48px;margin-bottom:12px">📚</div>
-    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">诗冉成长计划</div>
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">冉冉成长计划</div>
     <div style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:24px">请输入访问密码</div>
     <input id="authInput" type="password" placeholder="输入密码" style="width:100%;padding:14px;border-radius:12px;border:none;font-size:16px;text-align:center;outline:none;margin-bottom:12px" onkeydown="if(event.key==='Enter')checkAuth()">
     <button onclick="checkAuth()" style="width:100%;padding:14px;border-radius:12px;background:#fff;color:#2D7A5F;font-size:16px;font-weight:700">进入</button>
@@ -488,37 +496,64 @@ input,textarea,select{font-family:inherit}
 </div>
 
 <script>
-// ===== 密码门禁 =====
+// ===== 家长锁 =====
+// 源码里不再保存明文密码，只保存 SHA-256 摘要（改了密码就换这里的摘要）。
+// 说明：这是前端门禁，不是安全边界。真要保护孩子数据不被打开源码的人看到，
+// 需要服务端校验（和云同步一起做）。当前密码与旧版一致，家长无需改习惯。
 const AUTH_KEY='shiran_auth_v3';
-const AUTH_PASSWORD='shiran2026'; // 后续可改
+const AUTH_HASH='a73daae57d99e74bbab744b0559498f7d1dad780193e8cbdf1a9557ae5874e65';
+// 兜底摘要（FNV-1a，只在本机直接用 file:// 打开、拿不到 WebCrypto 时使用）。
+// 强度远低于 SHA-256，目的只是「源码里不出现明文密码」+ 本机打开时不被关在门外。
+const AUTH_HASH_FALLBACK='5ede0b1c';
 
 function isAuthed(){
   try{return sessionStorage.getItem(AUTH_KEY)==='1'}catch{return false}
 }
-function checkAuth(){
-  const v=document.getElementById('authInput').value.trim();
-  if(v===AUTH_PASSWORD){
+async function sha256Hex(text){
+  if(!(window.crypto&&window.crypto.subtle&&window.crypto.subtle.digest)) return null;
+  const buf=await window.crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function fnv1aHex(text){
+  let h=0x811c9dc5;
+  for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=(h+((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24)))>>>0}
+  return ('00000000'+h.toString(16)).slice(-8);
+}
+async function checkAuth(){
+  const input=document.getElementById('authInput');
+  const err=document.getElementById('authErr');
+  const v=input.value.trim();
+  const hex=await sha256Hex(v);
+  // 有 WebCrypto（https / localhost）用 SHA-256；本机 file:// 打开时退回 FNV-1a
+  const ok = (hex !== null) ? (hex === AUTH_HASH) : (fnv1aHex(v) === AUTH_HASH_FALLBACK);
+  if(ok){
     try{sessionStorage.setItem(AUTH_KEY,'1')}catch{}
     document.getElementById('authGate').style.display='none';
     // 密码验证通过后，初始化同步
     if(typeof initSync==='function') initSync();
   }else{
-    const err=document.getElementById('authErr');
+    err.textContent='密码错误，请重试';
     err.style.display='block';
     setTimeout(()=>err.style.display='none',2000);
-    document.getElementById('authInput').value='';
-    document.getElementById('authInput').focus();
+    input.value='';
+    input.focus();
   }
 }
 (function initAuth(){
   if(!isAuthed()){
     document.getElementById('authGate').style.display='flex';
     setTimeout(()=>{const i=document.getElementById('authInput');if(i)i.focus()},300);
-  }else{
-    // 已验证过，直接初始化同步
-    if(typeof initSync==='function') setTimeout(()=>initSync(),100);
   }
+  // 已验证过就不显示门禁（authGate 默认 display:none）；
+  // “本机保存”指示器统一放到下面的 load 事件里初始化。
 })();
+
+// 等页面脚本（sync.js 等）全部加载完再初始化“本机保存”指示器。
+// 注意：不能在 initAuth 里同步判断 typeof initSync —— 那时 sync.js 还没加载，
+// 判断永远是 false，指示器就再也不会出现（本轮修的就是这个）。
+window.addEventListener('load', function () {
+  if (isAuthed() && typeof initSync === 'function') initSync();
+}, { once: true });
 </script>
 
 <script src="data.js"></script>

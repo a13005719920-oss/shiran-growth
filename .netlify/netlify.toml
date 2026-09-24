@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/Users/mac/Documents/Hermes-Work/输出成品/诗冉打卡"
+publish = "."
 publishOrigin = "default"
 
 [build.environment]

@@ -1,6 +1,6 @@
 {
-  "name": "诗冉成长计划",
-  "short_name": "诗冉打卡",
+  "name": "冉冉成长计划",
+  "short_name": "冉冉打卡",
   "description": "一年级前20%成长执行计划打卡",
   "start_url": "./index.html",
   "display": "standalone",
