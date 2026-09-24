@@ -100,7 +100,11 @@ async function pullFromCloud() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     syncSha = data.sha;
-    const content = JSON.parse(atob(data.content));
+    // 修复：atob 不支持 UTF-8 中文，用 TextDecoder 正确解码
+    const binary = atob(data.content);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    const content = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     setSyncStatus('☁️', '已同步');
     return content;
   } catch (e) {
