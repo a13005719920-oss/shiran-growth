@@ -249,7 +249,7 @@ async function pullAndMerge() {
   if (cloudData && cloudData.children) {
     app = mergeData(app, cloudData);
     localStorage.setItem(STORE_KEY, JSON.stringify(app));
-    if (typeof render === 'function') render();
+    if (typeof renderAll === 'function') renderAll();
     setSyncStatus('☁️', '已同步');
   }
 }
@@ -264,7 +264,7 @@ function startAutoPull() {
       app = mergeData(app, cloudData);
       if (JSON.stringify(app) !== oldApp) {
         localStorage.setItem(STORE_KEY, JSON.stringify(app));
-        if (typeof render === 'function') render();
+        if (typeof renderAll === 'function') renderAll();
       }
     }
   }, 30000);
