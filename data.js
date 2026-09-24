@@ -85,12 +85,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听Hello / Goodbye / My name is…音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：Hello / Goodbye / My name is Shiran / What's your name?。指图/实物跟读3轮，再独立说Hello. My name is Shiran.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -181,12 +181,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：和爸爸用英语打招呼+自我介绍",
+              "detail": "在真实场景中使用本周句型：Hello. My name is Shiran.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -278,11 +278,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读Hello / Goodbye / My name is…",
+              "detail": "模拟课堂场景：1）大声带读Hello / Goodbye / My name is…3遍；2）练习发课堂指令Stand up / Sit down / Open your book；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -374,11 +374,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：Hello, Goodbye（主题绘本）",
+              "detail": "和家长一起读Hello, Goodbye（主题绘本）。家长读一句，孩子指图跟读。重点关注Hello / Goodbye / My name is…在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -469,12 +469,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：Hello Song",
+              "detail": "听Hello Song2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -566,11 +566,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：和爸爸用英语打招呼+自我介绍",
+              "detail": "在真实生活中使用本周英语：Hello. My name is Shiran.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -661,12 +661,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "问候：Hello. / Goodbye. / My name is Shiran...",
-              "detail": "问候：Hello. / Goodbye. / My name is Shiran.；Hello. / What’s your name?。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇Hello / Goodbye / My name is…和句型Hello. My name is Shiran.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -764,12 +764,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听book / bag / pencil音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：book / bag / pencil / Show me your…。指图/实物跟读3轮，再独立说Show me your book.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -860,12 +860,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：在超市找学习用品并说英文名",
+              "detail": "在真实场景中使用本周句型：Show me your book.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -957,11 +957,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读book / bag / pencil",
+              "detail": "模拟课堂场景：1）大声带读book / bag / pencil3遍；2）练习发课堂指令Show me your book / bag / pencil；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -1053,11 +1053,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：My School Bag（主题绘本）",
+              "detail": "和家长一起读My School Bag（主题绘本）。家长读一句，孩子指图跟读。重点关注book / bag / pencil在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -1148,12 +1148,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：School Things Song",
+              "detail": "听School Things Song2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -1245,11 +1245,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：在超市找学习用品并说英文名",
+              "detail": "在真实生活中使用本周英语：Show me your book.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -1340,12 +1340,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "学习用品：book / bag / pencil；Show me your bo...",
-              "detail": "学习用品：book / bag / pencil；Show me your book.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇book / bag / pencil和句型Show me your book.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -1443,12 +1443,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。听示范2遍，...",
-              "detail": "颜色：red / blue / yellow；It is red.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听red / blue / yellow音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：red / blue / yellow / It is red.。指图/实物跟读3轮，再独立说It is red.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -1539,12 +1539,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。听3个词，指...",
-              "detail": "颜色：red / blue / yellow；It is red.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：在家里找3种颜色用英语说",
+              "detail": "在真实场景中使用本周句型：It is red.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -1636,11 +1636,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。家长示范句型...",
-              "detail": "颜色：red / blue / yellow；It is red.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读red / blue / yellow",
+              "detail": "模拟课堂场景：1）大声带读red / blue / yellow3遍；2）练习发课堂指令Show me something red / blue / yellow；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -1732,11 +1732,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。把3张图排开...",
-              "detail": "颜色：red / blue / yellow；It is red.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：Color Dance（颜色绘本）",
+              "detail": "和家长一起读Color Dance（颜色绘本）。家长读一句，孩子指图跟读。重点关注red / blue / yellow在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -1827,12 +1827,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。换顺序问3轮...",
-              "detail": "颜色：red / blue / yellow；It is red.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：I See Something Blue",
+              "detail": "听I See Something Blue2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -1924,11 +1924,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。用本周词句编...",
-              "detail": "颜色：red / blue / yellow；It is red.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：在家里找3种颜色用英语说",
+              "detail": "在真实生活中使用本周英语：It is red.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -2019,12 +2019,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "颜色：red / blue / yellow；It is red.。用不同物品复...",
-              "detail": "颜色：red / blue / yellow；It is red.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇red / blue / yellow和句型It is red.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -2122,12 +2122,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听hand / head / foot音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：hand / head / foot / Touch your…。指图/实物跟读3轮，再独立说Touch your head.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -2218,12 +2218,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：用英语描述家人身体部位",
+              "detail": "在真实场景中使用本周句型：Touch your head.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -2315,11 +2315,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读hand / head / foot",
+              "detail": "模拟课堂场景：1）大声带读hand / head / foot3遍；2）练习发课堂指令Touch your head / hand / foot；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -2411,11 +2411,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：My Body（身体绘本）",
+              "detail": "和家长一起读My Body（身体绘本）。家长读一句，孩子指图跟读。重点关注hand / head / foot在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -2506,12 +2506,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：Head Shoulders Knees and Toes",
+              "detail": "听Head Shoulders Knees and Toes2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -2603,11 +2603,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：用英语描述家人身体部位",
+              "detail": "在真实生活中使用本周英语：Touch your head.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -2698,12 +2698,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "身体与动作：hand / head / foot；Touch your head...",
-              "detail": "身体与动作：hand / head / foot；Touch your head.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇hand / head / foot和句型Touch your head.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -2801,12 +2801,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。听示...",
-              "detail": "家庭：mum / dad / family；This is my mum.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听mum / dad / family音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：mum / dad / family / This is my…。指图/实物跟读3轮，再独立说This is my mum.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -2897,12 +2897,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。听3...",
-              "detail": "家庭：mum / dad / family；This is my mum.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：看全家福用英语介绍家人",
+              "detail": "在真实场景中使用本周句型：This is my mum.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -2994,11 +2994,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。家长...",
-              "detail": "家庭：mum / dad / family；This is my mum.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读mum / dad / family",
+              "detail": "模拟课堂场景：1）大声带读mum / dad / family3遍；2）练习发课堂指令This is my mum / dad；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -3090,11 +3090,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。把3...",
-              "detail": "家庭：mum / dad / family；This is my mum.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：My Family（家庭绘本）",
+              "detail": "和家长一起读My Family（家庭绘本）。家长读一句，孩子指图跟读。重点关注mum / dad / family在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -3185,12 +3185,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。换顺...",
-              "detail": "家庭：mum / dad / family；This is my mum.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：Finger Family",
+              "detail": "听Finger Family2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -3282,11 +3282,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。用本...",
-              "detail": "家庭：mum / dad / family；This is my mum.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：看全家福用英语介绍家人",
+              "detail": "在真实生活中使用本周英语：This is my mum.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -3377,12 +3377,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "家庭：mum / dad / family；This is my mum.。用不...",
-              "detail": "家庭：mum / dad / family；This is my mum.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇mum / dad / family和句型This is my mum.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -3480,12 +3480,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。听示范2遍，指...",
-              "detail": "动物：cat / dog / bird；It is a cat.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听cat / dog / bird音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：cat / dog / bird / It is a…。指图/实物跟读3轮，再独立说It is a cat.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -3576,12 +3576,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。听3个词，指对...",
-              "detail": "动物：cat / dog / bird；It is a cat.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：在公园观察动物用英语说",
+              "detail": "在真实场景中使用本周句型：It is a cat.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -3673,11 +3673,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。家长示范句型，...",
-              "detail": "动物：cat / dog / bird；It is a cat.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读cat / dog / bird",
+              "detail": "模拟课堂场景：1）大声带读cat / dog / bird3遍；2）练习发课堂指令What is it? It is a cat / dog / bird；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -3769,11 +3769,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。把3张图排开，...",
-              "detail": "动物：cat / dog / bird；It is a cat.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：Brown Bear, Brown Bear（动物绘本）",
+              "detail": "和家长一起读Brown Bear, Brown Bear（动物绘本）。家长读一句，孩子指图跟读。重点关注cat / dog / bird在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -3864,12 +3864,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。换顺序问3轮，...",
-              "detail": "动物：cat / dog / bird；It is a cat.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：Old MacDonald Had a Farm",
+              "detail": "听Old MacDonald Had a Farm2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -3961,11 +3961,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。用本周词句编1...",
-              "detail": "动物：cat / dog / bird；It is a cat.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：在公园观察动物用英语说",
+              "detail": "在真实生活中使用本周英语：It is a cat.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -4056,12 +4056,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "动物：cat / dog / bird；It is a cat.。用不同物品复习...",
-              "detail": "动物：cat / dog / bird；It is a cat.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇cat / dog / bird和句型It is a cat.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -4159,12 +4159,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听apple / banana / milk音频2遍，指实物跟读3轮",
+              "detail": "听课本配套音频2遍：apple / banana / milk / I like…。指图/实物跟读3轮，再独立说I like apples.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__次"
             },
             {
               "module": "阅读",
@@ -4255,12 +4255,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：品尝食物后用英语说喜好",
+              "detail": "在真实场景中使用本周句型：I like apples.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -4352,11 +4352,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读apple / banana / milk",
+              "detail": "模拟课堂场景：1）大声带读apple / banana / milk3遍；2）练习发课堂指令Do you like apples? Yes/No；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -4448,11 +4448,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "英语绘本跟读：I Like Apples（食物绘本）",
+              "detail": "和家长一起读I Like Apples（食物绘本）。家长读一句，孩子指图跟读。重点关注apple / banana / milk在故事中的使用。",
+              "parentTip": "指着图读，不要求每个词都认识；读完后问'你最喜欢哪个？'，可以用中文答。",
+              "recordLabel": "跟读__页"
             },
             {
               "module": "阅读",
@@ -4543,12 +4543,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：Do You Like Broccoli Ice Cream?",
+              "detail": "听Do You Like Broccoli Ice Cream?2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -4640,11 +4640,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "真实场景英语：品尝食物后用英语说喜好",
+              "detail": "在真实生活中使用本周英语：I like apples.。鼓励她主动说，说完给具体表扬。",
+              "parentTip": "创造场景让她输出；录视频记录，和Day1对比看进步。",
+              "recordLabel": "主动说__次"
             },
             {
               "module": "阅读",
@@ -4735,12 +4735,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
+              "level": "A",
               "duration": "8分钟",
-              "title": "喜好：apple / banana / milk；I like apples.。...",
-              "detail": "喜好：apple / banana / milk；I like apples.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "title": "本周复习+录30秒英语音频",
+              "detail": "快速过本周词汇apple / banana / milk和句型I like apples.。然后录一段30秒音频：用英语说本周学到的内容。",
+              "parentTip": "不纠错，记录能说几句；和上周录音对比，让她听自己的进步。",
+              "recordLabel": "录音时长__秒 / 能说__句"
             },
             {
               "module": "阅读",
@@ -4838,12 +4838,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。听示范2遍，指图/实物，再自愿跟说3轮。",
-              "parentTip": "先听课本配套音频；没有音频就用已熟悉表达。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "听本周综合音频，跟读问候+自我介绍2遍",
+              "detail": "听课本配套音频2遍：综合复用前7周词句。跟读3轮，注意发音。然后独立说一遍Hello. My name is Shiran. I like apples. This is my mum.",
+              "parentTip": "先听不急着读，让孩子耳朵先适应；听2遍再开口。",
+              "recordLabel": "独立说__句"
             },
             {
               "module": "阅读",
@@ -4934,12 +4934,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。听3个词，指对相应实物或图片，各做2轮。",
-              "parentTip": "不给中文逐词考试；用指物检验理解。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "用英语做一件事：家庭英语秀：自我介绍+词汇+唱歌",
+              "detail": "在真实场景中使用本周句型：Hello. My name is Shiran. I like apples. This is my mum.。至少独立使用3次。",
+              "parentTip": "创造自然使用机会，不要变成考试；用对了就鼓励。",
+              "recordLabel": "独立使用__次"
             },
             {
               "module": "阅读",
@@ -5031,11 +5031,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。家长示范句型，换人物或实物，轮流说3轮。",
-              "parentTip": "允许短答；先肯定意思，再自然重述。",
-              "recordLabel": "独立回应__次"
+              "duration": "10分钟",
+              "title": "科代表任务：练习课堂指令并带读综合复习",
+              "detail": "模拟课堂场景：1）大声带读综合复习3遍；2）练习发课堂指令完整自我介绍+课堂指令；3）角色扮演当小老师。",
+              "parentTip": "让她当老师，你当学生；指令要大声清晰，这是科代表的基本功。",
+              "recordLabel": "带读__遍 / 指令清晰度："
             },
             {
               "module": "阅读",
@@ -5127,11 +5127,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。把3张图排开，听一句选一张；再让孩子发指令。",
-              "parentTip": "给5秒等待，避免马上替孩子回答。",
-              "recordLabel": "独立回应__次"
+              "duration": "12分钟",
+              "title": "选一本最喜欢的英语绘本，尝试独立朗读",
+              "detail": "从本月读过的英语绘本中选一本最喜欢的，尝试自己朗读。遇到不会的词用拼音方法猜，或跳过。",
+              "parentTip": "不纠每个发音；读完后问'这个故事讲了什么？'，可以用中文答。",
+              "recordLabel": "独立读完__页"
             },
             {
               "module": "阅读",
@@ -5222,12 +5222,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。换顺序问3轮，不看示范；卡住时给第一个词。",
-              "parentTip": "记录独立回应几次，不要求拼写。",
-              "recordLabel": "独立回应__次"
+              "level": "A",
+              "duration": "10分钟",
+              "title": "英语儿歌跟唱：本周最爱儿歌串烧",
+              "detail": "听本周最爱儿歌串烧2-3遍，跟着唱并做动作。开心为主，不要求每个词都对。",
+              "parentTip": "周五轻松日，唱歌就是学；可以录视频看她一个月后的变化。",
+              "recordLabel": "跟唱状态：开心/一般/抗拒"
             },
             {
               "module": "阅读",
@@ -5319,11 +5319,11 @@ const PLAN = {
             {
               "module": "英语",
               "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。用本周词句编1分钟玩偶小剧场，互换角色。",
-              "parentTip": "孩子愿意多说才延长，不纠每个发音。",
-              "recordLabel": "独立回应__次"
+              "duration": "15分钟",
+              "title": "家庭英语秀：完整自我介绍+展示词汇+唱一首歌",
+              "detail": "录制一段2分钟英语秀：1）自我介绍Hello. My name is Shiran.；2）展示本周综合词汇；3）唱一首最喜欢的英语歌。拍视频保存。",
+              "parentTip": "这是8周成果展示！不纠错，录完夸她'你比一个月前进步好多'。",
+              "recordLabel": "完成度：完整/部分/需提醒"
             },
             {
               "module": "阅读",
@@ -5414,12 +5414,12 @@ const PLAN = {
             },
             {
               "module": "英语",
-              "level": "B",
-              "duration": "8分钟",
-              "title": "综合交流：复用前7周词句；Hello. My name is Shiran. I...",
-              "detail": "综合交流：复用前7周词句；Hello. My name is Shiran. I like apples.。用不同物品复习3轮；选最喜欢一句说给家人听。",
-              "parentTip": "只复现熟悉语言，不集中背单词。",
-              "recordLabel": "独立回应__次"
+              "level": "C",
+              "duration": "12分钟",
+              "title": "挑战：尝试读一本没读过的英语分级读物",
+              "detail": "选一本新的英语分级读物（如牛津树Level 1），尝试自己朗读。不会的词用自然拼读方法猜，实在不会跳过。",
+              "parentTip": "挑战任务，不会不算失败；能独立读3页就是胜利。",
+              "recordLabel": "独立读__页 / 猜对__个词"
             },
             {
               "module": "阅读",
